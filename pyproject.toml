@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.25,<2"]
 build-backend = "hatchling.build"
 
 [project]
@@ -22,8 +22,12 @@ classifiers = [
 ]
 dependencies = []
 
+[project.urls]
+Repository = "https://github.com/cheryljia27-commits/karpathy-course-tutor"
+Issues = "https://github.com/cheryljia27-commits/karpathy-course-tutor/issues"
+
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+dev = ["pytest>=8,<10"]
 
 [project.scripts]
 karpathy-tutor = "karpathy_course_tutor.cli:main"

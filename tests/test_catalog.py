@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from karpathy_course_tutor.catalog import find_source, load_course_map
 
 
@@ -21,3 +23,16 @@ def test_find_source_has_actionable_metadata():
     assert source.priority == 0
     assert "mechanism" in source.teaching_move.lower()
     assert "artifact" not in source.minimum_artifact.lower()
+
+
+def test_public_source_maps_cover_every_runtime_source():
+    source_pack = Path(
+        "source-packs/karpathy-ai-systems/course-map.md"
+    ).read_text(encoding="utf-8")
+    skill_reference = Path(
+        "skill/karpathy-course-tutor/references/course-map.md"
+    ).read_text(encoding="utf-8")
+
+    for source in load_course_map():
+        assert source.url in source_pack, source.id
+        assert source.url in skill_reference, source.id

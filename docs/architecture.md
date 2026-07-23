@@ -41,16 +41,17 @@ Private state is deliberately kept outside the repository.
 
 ### Deterministic core
 
-The Python package validates state, resolves sources, previews a low-bandwidth
-message, records completed artifacts, and evaluates message invariants. It has
-no runtime dependency on a model provider.
+The Python package validates state shape and track values, resolves sources,
+previews a low-bandwidth message, records completed artifacts, and evaluates
+transparent message invariants. It has no runtime dependency on a model
+provider and does not perform adaptive source selection.
 
 ### Agent skill
 
 The skill is the adaptive reasoning layer. It can interpret messy notes,
-reduce a broad question to one bottleneck, choose an appropriate artifact, and
-review the result. The skill must preserve the same source and evaluation
-boundaries as the deterministic core.
+reduce a broad question to one bottleneck, select a source or source segment,
+choose an appropriate artifact, and review the result. The skill must preserve
+the same source and evaluation boundaries as the deterministic core.
 
 ### Transport
 

@@ -6,6 +6,9 @@ from pathlib import Path
 from typing import Any
 
 
+TRACKS = frozenset({"llm-systems", "agent-loops", "evaluation"})
+
+
 @dataclass(slots=True)
 class LearnerState:
     current_track: str
@@ -20,7 +23,10 @@ class LearnerState:
     history: list[dict[str, Any]] = field(default_factory=list)
 
     @classmethod
-    def from_mapping(cls, value: dict[str, Any]) -> "LearnerState":
+    def from_mapping(cls, value: Any) -> "LearnerState":
+        if not isinstance(value, dict):
+            raise ValueError("learner-state root must be a JSON object")
+
         required = (
             "current_track",
             "current_source_id",
@@ -29,25 +35,54 @@ class LearnerState:
             "next_artifact",
             "completion_check",
         )
-        missing = [key for key in required if not str(value.get(key, "")).strip()]
+        missing = [
+            key
+            for key in required
+            if not isinstance(value.get(key), str) or not value[key].strip()
+        ]
         if missing:
             raise ValueError(f"Missing learner-state fields: {', '.join(missing)}")
 
-        timebox = int(value.get("timebox_minutes", 10))
+        current_track = value["current_track"].strip()
+        if current_track not in TRACKS:
+            available = ", ".join(sorted(TRACKS))
+            raise ValueError(
+                f"current_track must be one of: {available}; got {current_track!r}"
+            )
+
+        timebox = value.get("timebox_minutes", 10)
+        if isinstance(timebox, bool) or not isinstance(timebox, int):
+            raise ValueError("timebox_minutes must be an integer")
         if not 1 <= timebox <= 60:
             raise ValueError("timebox_minutes must be between 1 and 60")
 
+        avoid_today = value.get("avoid_today", [])
+        if not isinstance(avoid_today, list) or not all(
+            isinstance(item, str) for item in avoid_today
+        ):
+            raise ValueError("avoid_today must be a list of strings")
+
+        history = value.get("history", [])
+        if not isinstance(history, list) or not all(
+            isinstance(item, dict) for item in history
+        ):
+            raise ValueError("history must be a list of objects")
+
+        stuck_point = value.get("stuck_point", "")
+        if not isinstance(stuck_point, str):
+            raise ValueError("stuck_point must be a string")
+
         return cls(
-            current_track=str(value["current_track"]).strip(),
-            current_source_id=str(value["current_source_id"]).strip(),
-            focus=str(value["focus"]).strip(),
-            open_loop=str(value["open_loop"]).strip(),
-            next_artifact=str(value["next_artifact"]).strip(),
-            completion_check=str(value["completion_check"]).strip(),
+            current_track=current_track,
+            current_source_id=value["current_source_id"].strip(),
+            focus=value["focus"].strip(),
+            open_loop=value["open_loop"].strip(),
+            next_artifact=value["next_artifact"].strip(),
+            completion_check=value["completion_check"].strip(),
             timebox_minutes=timebox,
-            stuck_point=str(value.get("stuck_point", "")).strip(),
-            avoid_today=[str(item) for item in value.get("avoid_today", [])],
-            history=list(value.get("history", [])),
+            stuck_point=stuck_point.strip(),
+            avoid_today=[item.strip() for item in avoid_today],
+            history=list(history),
         )
 
     @classmethod

@@ -1,97 +1,105 @@
 # Karpathy Course Tutor
 
-An unofficial, source-grounded AI tutor for learning from Andrej Karpathy’s
-public courses without repeatedly rebuilding your study plan.
+[![CI](https://github.com/cheryljia27-commits/karpathy-course-tutor/actions/workflows/ci.yml/badge.svg)](https://github.com/cheryljia27-commits/karpathy-course-tutor/actions/workflows/ci.yml)
 
-It remembers the **learning state**, chooses one **small re-entry point**, and
-ends with a concrete **artifact and check**. It does not impersonate Karpathy,
-invent quotes, or replace the original material.
+An unofficial, source-grounded learning tool for returning to Andrej Karpathy's
+public courses without rebuilding the study plan from scratch.
 
-[Watch the 8-second prototype](assets/demo.mp4)
+The **Agent Skill** is the adaptive coaching layer. A zero-dependency
+**Python CLI** provides the inspectable state, message preview, progress
+recording, and deterministic message-invariant checks. No model API or key is
+required to verify the public repository.
 
-## The problem
+![Explicit learner state becomes one re-entry action and a passing invariant check](assets/verification-flow.svg)
 
-When self-study is interrupted, the lecture and notes are still there. What is
+The original interface experiment is kept separately:
+
+<a href="assets/demo.mp4">
+  <img src="assets/demo-poster.png" width="280" alt="AK Tutor Bot iMessage interaction prototype">
+</a>
+
+*An 8-second, anonymized interaction prototype. Click the image for the H.264
+video. The iMessage transport is not included in the public repository.*
+
+## Verify it in three minutes
+
+Requires Python 3.10 or newer.
+
+```bash
+git clone https://github.com/cheryljia27-commits/karpathy-course-tutor.git
+cd karpathy-course-tutor
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev]"
+
+pytest
+karpathy-tutor next --state examples/learner-state.json
+karpathy-tutor eval --state examples/learner-state.json
+```
+
+Expected: the tests pass, the generated message cites a primary source, and
+the evaluation label is `pass`.
+
+## What is implemented
+
+| Layer | What it does | Where to inspect |
+| --- | --- | --- |
+| Agent Skill | Reduces messy notes or a stuck point to one source-grounded learning action | [`skill/karpathy-course-tutor/SKILL.md`](skill/karpathy-course-tutor/SKILL.md) |
+| Deterministic core | Validates learner state, previews a re-entry message, records progress, and checks message invariants | [`src/karpathy_course_tutor/`](src/karpathy_course_tutor/) |
+| Source pack | Maps 14 creator-owned public sources to teaching moves and minimum artifacts | [`source-packs/karpathy-ai-systems/course-map.md`](source-packs/karpathy-ai-systems/course-map.md) |
+| Seed eval set | Exercises a valid re-entry, generic encouragement, and persona simulation | [`examples/eval-set.json`](examples/eval-set.json) |
+
+## The product idea
+
+When self-study is interrupted, the lecture and notes still exist. What is
 usually missing is a cheap answer to:
 
 > Where exactly should I restart?
 
-Most tutors wait for the learner to initiate a new conversation. This project
-treats initiation as a state-selection problem.
+This project treats initiation as a state-selection problem. It keeps the
+current source, unresolved loop, next artifact, observable check, and timebox
+explicit, then asks an agent to choose the smallest useful return.
 
 ```mermaid
 flowchart LR
-  A["Official course or writing"] --> B["Explicit learner state"]
+  A["Primary source"] --> B["Explicit learner state"]
   B --> C["One 5–15 minute re-entry"]
   C --> D["Small artifact"]
   D --> E["Observable check"]
   E --> B
 ```
 
-## What it produces
+## Example
 
-Given the sample state:
-
-```json
-{
-  "current_source_id": "deep-dive-llms",
-  "focus": "tool use and web search",
-  "open_loop": "Explain what the model checked, not only what tool use does.",
-  "next_artifact": "Rewrite one sentence in notes/tool-use.md",
-  "completion_check": "The sentence names the action and returned evidence.",
-  "timebox_minutes": 10
-}
-```
-
-the deterministic preview produces:
+Given the synthetic state in
+[`examples/learner-state.json`](examples/learner-state.json), the deterministic
+preview produces:
 
 ```text
 Don't restart the whole course. Return to “tool use and web search”:
 Explain what the model checked, not only what tool use does. Spend 10 minutes
 on one artifact: Rewrite one sentence in notes/tool-use.md.
-Check: The sentence names the action and returned evidence.
+Check: The sentence names both the external action and the returned evidence.
 Source: Deep Dive into LLMs like ChatGPT → https://www.youtube.com/watch?v=7xTGNNLPyMI
 ```
 
-An AI agent using the bundled skill can make that intervention more adaptive
-while keeping the same source, state, artifact, and evaluation boundaries.
-
-## Quick start
-
-Requires Python 3.10 or newer.
-
-```bash
-git clone git@github.com:cheryljia27-commits/karpathy-course-tutor.git
-cd karpathy-course-tutor
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e .
-
-karpathy-tutor next --state examples/learner-state.json
-karpathy-tutor eval --state examples/learner-state.json
-karpathy-tutor sources --track llm-systems
-```
-
-Create a private learner-state file:
-
-```bash
-karpathy-tutor init --output learner-state.json
-```
-
-`learner-state.json`, `.env`, and `private/` are gitignored by default.
+The `eval` command is deliberately narrow: it checks message invariants such as
+the current loop, artifact, verification condition, timebox, primary-source
+URL, response size, and persona boundary. It is not a claim of end-to-end model
+quality.
 
 ## Use it as an Agent Skill
 
-The repository includes a self-contained Agent Skill:
-
-```text
-skill/karpathy-course-tutor/
-```
-
-To make it available to Codex locally:
+Install the bundled skill without silently merging it into an older copy:
 
 ```bash
-cp -R skill/karpathy-course-tutor ~/.codex/skills/
+destination="$HOME/.codex/skills/karpathy-course-tutor"
+mkdir -p "$(dirname "$destination")"
+if [ -e "$destination" ]; then
+  echo "Already exists: $destination"
+else
+  cp -R skill/karpathy-course-tutor "$destination"
+fi
 ```
 
 Then invoke it with a note or learner-state file:
@@ -104,67 +112,52 @@ source-grounded 10-minute learning artifact.
 The skill supports three modes:
 
 - re-enter an interrupted course or lecture;
-- explain a concept through a tiny inspectable artifact;
+- understand one mechanism through a tiny inspectable artifact;
 - review an artifact using an observable pass/fail check.
 
-## Karpathy-specific source pack
+## Source and identity boundaries
 
-This is not merely a generic tutor schema with a famous name attached. The
-bundled source pack organizes primary public material into three practical
-tracks:
+- Cite a primary creator-owned source for specific claims.
+- Keep teaching-pattern synthesis labeled as interpretation.
+- Assign an artifact and a check; do not pretend the message created the work.
+- Never claim what Karpathy “would say,” imitate his voice, or invent quotes.
+- Do not redistribute course videos, full transcripts, or private material.
 
-1. **LLM systems** — tokens, next-token prediction, context, Transformers,
-   pretraining, post-training, tools, memory, and limitations.
-2. **Agent and tutor loops** — state, tools, workflows, source-of-truth files,
-   human-in-the-loop design, and small complete systems.
-3. **Evaluation and verification** — baselines, golden cases, failure
-   taxonomies, groundedness, and empirical debugging.
-
-Every entry contains an official URL, an original teaching-move summary, and a
-minimum artifact. See
-[`source-packs/karpathy-ai-systems/course-map.md`](source-packs/karpathy-ai-systems/course-map.md).
-
-The pack intentionally contains **no full transcripts**. The teacher and the
-original source remain the authority.
-
-## Design rules
-
-- **Source before synthesis.** Cite the primary material used.
-- **Smallest complete thing first.** Reduce broad study goals to an inspectable
-  object.
-- **Artifact over conversation.** End with code, a note, a diagram, an eval
-  row, or another durable object.
-- **Verification before complexity.** Define what success or failure looks
-  like.
-- **Quiet memory.** Use learner history to select the next step, not to perform
-  intimacy.
-- **No persona simulation.** Never claim what Karpathy “would say.”
+The source pack contains official URLs, original teaching-move summaries, and
+minimum artifacts. The teacher and original source remain the authority.
 
 ## Repository map
 
 ```text
-src/karpathy_course_tutor/  zero-dependency state, selection, and eval CLI
+src/karpathy_course_tutor/  deterministic state, message, progress, and eval CLI
+skill/                      adaptive Agent Skill
 source-packs/               curated primary-source learning map
-skill/                      installable Agent Skill
-examples/                   synthetic learner state and eval examples
-docs/                       thesis, architecture, and evaluation rubric
-tests/                      behavioral and source-pack checks
-assets/                     original prototype demo
+examples/                   synthetic learner state and seed eval cases
+docs/                       product thesis, architecture, and evaluation rubric
+tests/                      state, CLI, behavior, and source-pack checks
+.github/workflows/          supported-version and installed-wheel verification
+assets/                     anonymized interaction prototype
 ```
 
-## What the public version leaves out
+For the deeper reasoning, see
+[`docs/product-thesis.md`](docs/product-thesis.md),
+[`docs/architecture.md`](docs/architecture.md), and
+[`docs/evaluation.md`](docs/evaluation.md).
 
-The original prototype used private Obsidian notes and an iMessage re-entry
-surface. This repository includes neither personal notes nor contact details.
-Transports are deliberately separate from the tutoring core: the message can
-be delivered by a scheduler, a local notification, a chat app, or an agent
+## Public/private boundary
+
+The original prototype used private Obsidian source notes and an iMessage
+surface. This repository does not distribute those source note files or any
+contact identifiers. The included demo is an anonymized interface recording.
+Transport remains separate from the tutoring core, so the same message can be
+delivered by a scheduler, local notification, chat integration, or agent
 runtime.
 
 ## Status
 
-`v0.1` is a small, inspectable reference implementation. The interesting
-question is not whether the tutor can chat. It is whether the tutor can select
-the right re-entry point and reliably cause one useful learning artifact.
+`v0.1.0` is a small reference implementation. The open product question is
+whether the system selects the right re-entry point and reliably causes one
+useful learning artifact, not whether it can sustain a long chat.
 
 ## License and attribution
 

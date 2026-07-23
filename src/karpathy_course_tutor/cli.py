@@ -65,13 +65,13 @@ def _state_and_source(path: str):
     return state, source
 
 
-def main(argv: Sequence[str] | None = None) -> int:
-    args = _parser().parse_args(argv)
-
+def _run(args: argparse.Namespace) -> int:
     if args.command == "init":
         destination = Path(args.output)
         if destination.exists() and not args.force:
-            raise SystemExit(f"{destination} already exists; use --force to replace it")
+            raise ValueError(
+                f"{destination} already exists; use --force to replace it"
+            )
         example_state().save(destination)
         print(f"Created {destination}")
         return 0
@@ -141,3 +141,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
 
     return 2
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    parser = _parser()
+    args = parser.parse_args(argv)
+    try:
+        return _run(args)
+    except (OSError, UnicodeError, ValueError) as error:
+        parser.exit(2, f"{parser.prog}: error: {error}\n")
