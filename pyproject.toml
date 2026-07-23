@@ -9,7 +9,7 @@ description = "An unofficial, source-grounded tutor for learning from Andrej Kar
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
-authors = [{ name = "Yimeng" }]
+authors = [{ name = "Yimeng Jia" }]
 keywords = ["ai-tutor", "agent-skill", "self-directed-learning", "karpathy"]
 classifiers = [
   "Development Status :: 3 - Alpha",
