@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from karpathy_course_tutor.cli import main
+from ai_tutor_bot.cli import main
 
 
 def test_cli_reports_invalid_state_without_traceback(tmp_path, capsys):
@@ -15,7 +15,7 @@ def test_cli_reports_invalid_state_without_traceback(tmp_path, capsys):
     captured = capsys.readouterr()
     assert exit_info.value.code == 2
     assert captured.out == ""
-    assert "karpathy-tutor: error:" in captured.err
+    assert "ai-tutor-bot: error:" in captured.err
     assert "Traceback" not in captured.err
 
 

@@ -1,6 +1,6 @@
 import pytest
 
-from karpathy_course_tutor.state import LearnerState
+from ai_tutor_bot.state import LearnerState
 
 
 def valid_state() -> dict:
@@ -12,6 +12,7 @@ def valid_state() -> dict:
         "next_artifact": "Rewrite one sentence.",
         "completion_check": "The sentence names returned evidence.",
         "timebox_minutes": 10,
+        "current_note_path": "notes/deep-dive-llms.md",
         "avoid_today": ["restart the lecture"],
         "history": [],
     }
@@ -23,6 +24,7 @@ def valid_state() -> dict:
         ("avoid_today", "restart", "list of strings"),
         ("history", {"artifact": "notes.md"}, "list of objects"),
         ("timebox_minutes", True, "must be an integer"),
+        ("current_note_path", ["notes.md"], "must be a string"),
         ("current_track", "unknown", "must be one of"),
     ],
 )

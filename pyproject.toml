@@ -3,14 +3,14 @@ requires = ["hatchling>=1.25,<2"]
 build-backend = "hatchling.build"
 
 [project]
-name = "karpathy-course-tutor"
+name = "ai-tutor-bot"
 version = "0.1.0"
-description = "An unofficial, source-grounded tutor for learning from Andrej Karpathy's public courses."
+description = "A proactive, source-grounded AI tutor loop for preserving continuity in interrupted self-study."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 authors = [{ name = "Yimeng Jia" }]
-keywords = ["ai-tutor", "agent-skill", "self-directed-learning", "karpathy"]
+keywords = ["ai-tutor", "agent-skill", "self-directed-learning", "proactive-ai", "karpathy"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "License :: OSI Approved :: MIT License",
@@ -23,20 +23,20 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Repository = "https://github.com/cheryljia27-commits/karpathy-course-tutor"
-Issues = "https://github.com/cheryljia27-commits/karpathy-course-tutor/issues"
+Repository = "https://github.com/cheryljia27-commits/ai-tutor-bot"
+Issues = "https://github.com/cheryljia27-commits/ai-tutor-bot/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10"]
 
 [project.scripts]
-karpathy-tutor = "karpathy_course_tutor.cli:main"
+ai-tutor-bot = "ai_tutor_bot.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/karpathy_course_tutor"]
+packages = ["src/ai_tutor_bot"]
 
 [tool.hatch.build.targets.wheel.force-include]
-"src/karpathy_course_tutor/data/course_map.json" = "karpathy_course_tutor/data/course_map.json"
+"src/ai_tutor_bot/data/course_map.json" = "ai_tutor_bot/data/course_map.json"
 
 [tool.pytest.ini_options]
 addopts = "-q"

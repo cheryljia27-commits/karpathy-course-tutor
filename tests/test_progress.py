@@ -1,5 +1,5 @@
-from karpathy_course_tutor.progress import record_progress
-from karpathy_course_tutor.state import LearnerState
+from ai_tutor_bot.progress import record_progress
+from ai_tutor_bot.state import LearnerState
 
 
 def test_record_progress_preserves_a_small_history():

@@ -1,9 +1,9 @@
 ---
-name: karpathy-course-tutor
-description: Turn Andrej Karpathy's public courses, talks, code, and writing into source-grounded self-study interventions without simulating his persona. Use when a learner needs to re-enter an interrupted Karpathy course, understand an LLM or agent concept through a tiny artifact, choose the next 5–15 minute study action, review a learning artifact, or build an evaluation row from explicit learner state or notes.
+name: ai-tutor-bot
+description: Preserve continuity in interrupted self-study by turning public teaching material and explicit learner state into one source-grounded re-entry point. Use when a learner needs a proactive morning or evening anchor, a brief follow-up after replying, a 5–15 minute study action, artifact review, or an evaluation row without turning the message thread into the classroom.
 ---
 
-# Karpathy Course Tutor
+# AI Tutor Bot
 
 Use primary public material to select one inspectable learning action. Preserve
 the teacher as the source of pedagogy and the learner's files as the source of
@@ -19,6 +19,18 @@ state.
 
 ## Choose the mode
 
+### Proactive anchor
+
+Use for a scheduled morning or evening re-entry message.
+
+1. Read the learner state, then the current source note it points to.
+2. Identify the one unresolved handle that survived the previous session.
+3. In the morning, make the first step back smaller; begin with `☀️`.
+4. In the evening, leave one useful handle for tomorrow; begin with `🌙`.
+5. Keep the message short enough that the learner must return to the source or
+   note to continue.
+6. Do not ask a generic engagement question or assign a daily report.
+
 ### Re-entry
 
 Use when study was interrupted or the learner does not know where to restart.
@@ -32,6 +44,18 @@ Use when study was interrupted or the learner does not know where to restart.
 
 Do not reopen the whole lecture, dump the curriculum, or ask the learner to
 summarize everything.
+
+### Brief follow-up
+
+Use after the learner replies to an anchor.
+
+1. Decide whether the reply names a real bottleneck or is only acknowledgment.
+2. If it names a bottleneck, give one criterion that makes the next artifact
+   more inspectable.
+3. If it is only acknowledgment, close the loop without manufacturing another
+   question.
+4. Stop after one useful follow-up. The next action should happen in the source,
+   code, or note rather than in the message thread.
 
 ### Concept coaching
 
@@ -55,7 +79,7 @@ Use when the learner provides code, a note, diagram, trace, or eval row.
 
 ## Output contract
 
-For a re-entry response, return:
+For a direct re-entry response, return:
 
 ```text
 Re-entry: <the exact unresolved loop>
@@ -66,6 +90,13 @@ Source: <primary source title and URL>
 
 Keep the total response short enough to act on immediately. Expand only when
 the learner asks for teaching or review.
+
+For a scheduled anchor, return only the message body. A morning anchor begins
+with `☀️`; an evening anchor begins with `🌙`. It names the current loose
+handle and one small return, without field labels or a task-reporting tone.
+
+For a brief follow-up, return at most one short paragraph. Point to one
+observable distinction, then stop.
 
 ## Source and identity boundaries
 

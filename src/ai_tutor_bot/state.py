@@ -19,6 +19,7 @@ class LearnerState:
     completion_check: str
     timebox_minutes: int = 10
     stuck_point: str = ""
+    current_note_path: str = ""
     avoid_today: list[str] = field(default_factory=list)
     history: list[dict[str, Any]] = field(default_factory=list)
 
@@ -72,6 +73,10 @@ class LearnerState:
         if not isinstance(stuck_point, str):
             raise ValueError("stuck_point must be a string")
 
+        current_note_path = value.get("current_note_path", "")
+        if not isinstance(current_note_path, str):
+            raise ValueError("current_note_path must be a string")
+
         return cls(
             current_track=current_track,
             current_source_id=value["current_source_id"].strip(),
@@ -81,6 +86,7 @@ class LearnerState:
             completion_check=value["completion_check"].strip(),
             timebox_minutes=timebox,
             stuck_point=stuck_point.strip(),
+            current_note_path=current_note_path.strip(),
             avoid_today=[item.strip() for item in avoid_today],
             history=list(history),
         )
@@ -118,5 +124,6 @@ def example_state() -> LearnerState:
         ),
         timebox_minutes=10,
         stuck_point="The current note describes the interface but not the mechanism.",
+        current_note_path="notes/deep-dive-llms.md",
         avoid_today=["restart the whole lecture", "collect more sources"],
     )

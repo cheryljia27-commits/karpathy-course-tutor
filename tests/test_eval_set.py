@@ -1,9 +1,9 @@
 import json
 from pathlib import Path
 
-from karpathy_course_tutor.catalog import find_source, load_course_map
-from karpathy_course_tutor.engine import evaluate_message
-from karpathy_course_tutor.state import LearnerState
+from ai_tutor_bot.catalog import find_source, load_course_map
+from ai_tutor_bot.engine import evaluate_message
+from ai_tutor_bot.state import LearnerState
 
 
 def test_public_eval_set_matches_expected_labels():

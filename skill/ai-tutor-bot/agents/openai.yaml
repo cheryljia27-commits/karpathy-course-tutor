@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Tutor Bot"
+  short_description: "Preserve continuity with source-grounded re-entry"
+  default_prompt: "Use $ai-tutor-bot to turn my current course notes into one source-grounded re-entry point and a small learning artifact."

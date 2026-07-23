@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
-  <title id="title">Karpathy Course Tutor verification flow</title>
+  <title id="title">AI Tutor Bot verification flow</title>
   <desc id="desc">A learner-state JSON file becomes one source-grounded re-entry message, then passes seven deterministic message checks.</desc>
   <rect width="1200" height="520" rx="24" fill="#0d1117"/>
   <text x="60" y="66" fill="#f0f6fc" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="30" font-weight="700">One learning loop, inspectable end to end</text>
@@ -21,7 +21,7 @@
   <path d="M422 280 L434 290 L422 300" fill="none" stroke="#58a6ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 
   <rect x="450" y="140" width="310" height="300" rx="18" fill="#161b22" stroke="#30363d" stroke-width="2"/>
-  <text x="475" y="184" fill="#7ee787" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17">$ karpathy-tutor next</text>
+  <text x="475" y="184" fill="#7ee787" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17">$ ai-tutor-bot next</text>
   <line x1="475" y1="204" x2="735" y2="204" stroke="#30363d" stroke-width="2"/>
   <text x="475" y="248" fill="#f0f6fc" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="600">Don't restart the course.</text>
   <text x="475" y="280" fill="#c9d1d9" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16">Return to tool use.</text>
@@ -34,7 +34,7 @@
   <path d="M812 280 L824 290 L812 300" fill="none" stroke="#58a6ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 
   <rect x="840" y="140" width="300" height="300" rx="18" fill="#161b22" stroke="#238636" stroke-width="2"/>
-  <text x="865" y="184" fill="#7ee787" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17">$ karpathy-tutor eval</text>
+  <text x="865" y="184" fill="#7ee787" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17">$ ai-tutor-bot eval</text>
   <line x1="865" y1="204" x2="1115" y2="204" stroke="#30363d" stroke-width="2"/>
   <text x="865" y="273" fill="#3fb950" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="46" font-weight="800">PASS</text>
   <text x="865" y="313" fill="#c9d1d9" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="17">7 / 7 invariants</text>

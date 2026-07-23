@@ -1,4 +1,4 @@
-"""Source-grounded tutoring primitives for Karpathy's public courses."""
+"""Public, source-grounded primitives for the AI Tutor Bot."""
 
 from .catalog import CourseSource, load_course_map
 from .engine import EvalResult, build_reentry_message, evaluate_message

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from karpathy_course_tutor.catalog import find_source, load_course_map
+from ai_tutor_bot.catalog import find_source, load_course_map
 
 
 def test_course_map_is_unique_and_primary_linked():
@@ -30,7 +30,7 @@ def test_public_source_maps_cover_every_runtime_source():
         "source-packs/karpathy-ai-systems/course-map.md"
     ).read_text(encoding="utf-8")
     skill_reference = Path(
-        "skill/karpathy-course-tutor/references/course-map.md"
+        "skill/ai-tutor-bot/references/course-map.md"
     ).read_text(encoding="utf-8")
 
     for source in load_course_map():

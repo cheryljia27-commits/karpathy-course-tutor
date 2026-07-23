@@ -13,8 +13,8 @@ from .state import LearnerState, example_state
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="karpathy-tutor",
-        description="Preview and evaluate source-grounded course re-entry prompts.",
+        prog="ai-tutor-bot",
+        description="Preview and evaluate source-grounded learning re-entry prompts.",
     )
     commands = parser.add_subparsers(dest="command", required=True)
 

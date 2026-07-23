@@ -9,6 +9,7 @@ Use the minimum state needed to select one next intervention.
   "focus": "tool use and web search",
   "open_loop": "Explain what the model checked.",
   "stuck_point": "The note describes the feature, not the mechanism.",
+  "current_note_path": "notes/deep-dive-llms.md",
   "next_artifact": "Rewrite one sentence",
   "completion_check": "The sentence names the action and returned evidence.",
   "timebox_minutes": 10,
@@ -24,6 +25,7 @@ Use the minimum state needed to select one next intervention.
 - `focus`: a narrow concept, mechanism, or product decision.
 - `open_loop`: the exact unresolved claim or question.
 - `stuck_point`: optional evidence about why the loop remains open.
+- `current_note_path`: optional path to the learner's current durable note.
 - `next_artifact`: one durable object, not “study” or “think more.”
 - `completion_check`: one observable condition that can pass or fail.
 - `timebox_minutes`: normally 5–15 for re-entry.

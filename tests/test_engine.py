@@ -1,6 +1,6 @@
-from karpathy_course_tutor.catalog import find_source, load_course_map
-from karpathy_course_tutor.engine import build_reentry_message, evaluate_message
-from karpathy_course_tutor.state import LearnerState
+from ai_tutor_bot.catalog import find_source, load_course_map
+from ai_tutor_bot.engine import build_reentry_message, evaluate_message
+from ai_tutor_bot.state import LearnerState
 
 
 def sample_state() -> LearnerState:

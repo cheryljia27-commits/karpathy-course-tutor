@@ -32,7 +32,7 @@ class CourseSource:
 
 
 def load_course_map() -> list[CourseSource]:
-    path = files("karpathy_course_tutor").joinpath("data/course_map.json")
+    path = files("ai_tutor_bot").joinpath("data/course_map.json")
     payload = json.loads(path.read_text(encoding="utf-8"))
     return [CourseSource.from_mapping(item) for item in payload["sources"]]
 

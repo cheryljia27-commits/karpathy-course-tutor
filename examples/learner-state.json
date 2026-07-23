@@ -7,6 +7,7 @@
   "completion_check": "The sentence names both the external action and the returned evidence.",
   "timebox_minutes": 10,
   "stuck_point": "The note describes the feature but not the mechanism.",
+  "current_note_path": "notes/deep-dive-llms.md",
   "avoid_today": [
     "restart the whole lecture",
     "collect more sources"

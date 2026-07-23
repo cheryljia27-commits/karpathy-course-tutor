@@ -21,7 +21,7 @@ friction?
 
 The CLI implements these as transparent message invariants, not as a model
 quality score. The checks are intentionally simple enough to inspect in
-`src/karpathy_course_tutor/engine.py`.
+`src/ai_tutor_bot/engine.py`.
 
 ## Labels
 
@@ -45,10 +45,14 @@ quality score. The checks are intentionally simple enough to inspect in
 
 ## Qualitative review risks
 
-Two useful review risks are not mechanically scored in `v0.1.0`:
+These useful review risks are not mechanically scored in `v0.1.0`:
 
 | Risk | Meaning |
 | --- | --- |
+| `generic-reminder` | Tells the learner to study without restoring the actual open loop |
+| `daily-report-pressure` | Turns a re-entry point into an obligation to report progress |
+| `phone-as-classroom` | Tries to move the substantive learning session into chat |
+| `boss-like-instruction` | Treats the learner as an executor instead of preserving agency |
 | `performative-memory` | Mentions history to signal intimacy, not to select work |
 | `engagement-maxxing` | Asks questions mainly to keep the conversation going |
 

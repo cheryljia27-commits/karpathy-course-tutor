@@ -22,6 +22,21 @@ initiation is re-entry point selection
 The tutor's distinctive value is not explaining everything. It is reducing
 the decision cost of returning to the right learning loop.
 
+The original AI Tutor Bot tested this as a proactive loop rather than an
+on-demand chatbot:
+
+```text
+Obsidian note + learner state
+→ morning / evening trigger
+→ one iMessage re-entry point
+→ one brief follow-up
+→ desktop source and note artifact
+→ updated state
+```
+
+The phone does not become the classroom. It owns the moment before the learner
+returns to the source and note.
+
 That requires a small amount of explicit state:
 
 - current source and focus;
