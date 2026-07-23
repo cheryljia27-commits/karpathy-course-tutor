@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "karpathy-course-tutor"
+version = "0.1.0"
+description = "An unofficial, source-grounded tutor for learning from Andrej Karpathy's public courses."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Yimeng" }]
+keywords = ["ai-tutor", "agent-skill", "self-directed-learning", "karpathy"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Education",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+karpathy-tutor = "karpathy_course_tutor.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/karpathy_course_tutor"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/karpathy_course_tutor/data/course_map.json" = "karpathy_course_tutor/data/course_map.json"
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]

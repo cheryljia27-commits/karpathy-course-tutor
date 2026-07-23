@@ -1,0 +1,23 @@
+[
+  {
+    "name": "specific re-entry with artifact",
+    "learner_state": "examples/learner-state.json",
+    "message": "Don't restart the whole course. Return to “tool use and web search”: Explain what the model checked, not only what tool use does. Spend 10 minutes on one artifact: Rewrite one sentence in notes/tool-use.md. Check: The sentence names both the external action and the returned evidence. Source: Deep Dive into LLMs like ChatGPT → https://www.youtube.com/watch?v=7xTGNNLPyMI",
+    "expected_label": "pass",
+    "reason": "The message selects the open loop, timeboxes one artifact, and cites the primary source."
+  },
+  {
+    "name": "generic encouragement",
+    "learner_state": "examples/learner-state.json",
+    "message": "Keep going. You are doing great. Do you want to study AI today?",
+    "expected_label": "fail",
+    "reason": "It could be sent to anyone and does not identify an artifact or source."
+  },
+  {
+    "name": "persona simulation",
+    "learner_state": "examples/learner-state.json",
+    "message": "Karpathy would say you should keep learning.",
+    "expected_label": "fail",
+    "reason": "It invents authority and still does not select a grounded re-entry point."
+  }
+]

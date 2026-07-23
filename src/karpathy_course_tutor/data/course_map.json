@@ -1,0 +1,151 @@
+{
+  "version": "0.1",
+  "scope": "Primary public sources with original metadata; no transcripts.",
+  "tracks": [
+    "llm-systems",
+    "agent-loops",
+    "evaluation"
+  ],
+  "sources": [
+    {
+      "id": "deep-dive-llms",
+      "title": "Deep Dive into LLMs like ChatGPT",
+      "url": "https://www.youtube.com/watch?v=7xTGNNLPyMI",
+      "kind": "video",
+      "track": "llm-systems",
+      "priority": 0,
+      "teaching_move": "Compress the modern LLM pipeline into mechanisms, capabilities, and limitations that can be inspected separately.",
+      "minimum_artifact": "One mechanism → behavior → product-risk row."
+    },
+    {
+      "id": "intro-to-llms",
+      "title": "Intro to Large Language Models",
+      "url": "https://www.youtube.com/watch?v=zjkBMFhNj_g",
+      "kind": "video",
+      "track": "llm-systems",
+      "priority": 0,
+      "teaching_move": "Build an operating-system-level mental model before diving into implementation details.",
+      "minimum_artifact": "A one-page map of parameters, context, tools, and failure surfaces."
+    },
+    {
+      "id": "how-i-use-llms",
+      "title": "How I use LLMs",
+      "url": "https://www.youtube.com/watch?v=EWvNQjAaOHw",
+      "kind": "video",
+      "track": "llm-systems",
+      "priority": 0,
+      "teaching_move": "Connect model behavior to a concrete human workflow and keep limitations visible.",
+      "minimum_artifact": "A task → model role → verification table for one real workflow."
+    },
+    {
+      "id": "micrograd",
+      "title": "The spelled-out intro to neural networks and backpropagation: building micrograd",
+      "url": "https://www.youtube.com/watch?v=VMj-3S1tku0",
+      "kind": "video",
+      "track": "llm-systems",
+      "priority": 0,
+      "teaching_move": "Expose backpropagation by building the smallest complete scalar autograd engine.",
+      "minimum_artifact": "Trace one value, local gradient, and chain-rule update by hand."
+    },
+    {
+      "id": "build-gpt",
+      "title": "Let's build GPT: from scratch, in code, spelled out",
+      "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+      "kind": "video",
+      "track": "llm-systems",
+      "priority": 0,
+      "teaching_move": "Move from a tiny dataset and bigram baseline toward a complete Transformer.",
+      "minimum_artifact": "One diagram showing how a token representation changes through one block."
+    },
+    {
+      "id": "gpt-tokenizer",
+      "title": "Let's build the GPT Tokenizer",
+      "url": "https://www.youtube.com/watch?v=zduSFxRajkE",
+      "kind": "video",
+      "track": "llm-systems",
+      "priority": 1,
+      "teaching_move": "Turn tokenization from preprocessing magic into inspectable code and edge cases.",
+      "minimum_artifact": "Three strings, their tokenizations, and one observed consequence."
+    },
+    {
+      "id": "reproduce-gpt2",
+      "title": "Let's reproduce GPT-2 (124M)",
+      "url": "https://www.youtube.com/watch?v=l8pRSuU81PU",
+      "kind": "video",
+      "track": "llm-systems",
+      "priority": 1,
+      "teaching_move": "Use reproduction, logs, and known checkpoints to make end-to-end understanding testable.",
+      "minimum_artifact": "A checklist of assumptions, observables, and one expected checkpoint."
+    },
+    {
+      "id": "llm101n",
+      "title": "LLM101n (archived course proposal)",
+      "url": "https://github.com/karpathy/LLM101n",
+      "kind": "repository",
+      "track": "llm-systems",
+      "priority": 1,
+      "teaching_move": "Frame a proposed curriculum around building a complete AI system end to end.",
+      "minimum_artifact": "A build map from raw data to one evaluated model behavior."
+    },
+    {
+      "id": "software-is-changing-again",
+      "title": "Software Is Changing (Again)",
+      "url": "https://www.youtube.com/watch?v=LCEmiRjPEtQ",
+      "kind": "talk",
+      "track": "agent-loops",
+      "priority": 0,
+      "teaching_move": "Separate software layers and show how natural language becomes a new interface to computers.",
+      "minimum_artifact": "A boundary table for Software 1.0, 2.0, and 3.0 in one product."
+    },
+    {
+      "id": "llm-wiki",
+      "title": "LLM Wiki",
+      "url": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      "kind": "gist",
+      "track": "agent-loops",
+      "priority": 0,
+      "teaching_move": "Treat accumulated files as a compounding source of truth for human and agent work.",
+      "minimum_artifact": "A raw-source → compiled-note → agent-context file map."
+    },
+    {
+      "id": "append-and-review",
+      "title": "The append-and-review note",
+      "url": "https://karpathy.bearblog.dev/the-append-and-review-note/",
+      "kind": "article",
+      "track": "agent-loops",
+      "priority": 0,
+      "teaching_move": "Use a simple append-and-review loop instead of overbuilding a knowledge system.",
+      "minimum_artifact": "One append-only note with a scheduled review rule."
+    },
+    {
+      "id": "autoresearch",
+      "title": "autoresearch",
+      "url": "https://github.com/karpathy/autoresearch",
+      "kind": "repository",
+      "track": "agent-loops",
+      "priority": 1,
+      "teaching_move": "Constrain an agent loop around a measurable objective and inspectable experiments.",
+      "minimum_artifact": "A loop diagram with state, action, metric, stop rule, and human review."
+    },
+    {
+      "id": "training-recipe",
+      "title": "A Recipe for Training Neural Networks",
+      "url": "https://karpathy.github.io/2019/04/25/recipe/",
+      "kind": "article",
+      "track": "evaluation",
+      "priority": 0,
+      "teaching_move": "Debug from a verified baseline, inspect exact failures, and add complexity only after evidence.",
+      "minimum_artifact": "A baseline → failure → hypothesis → check row."
+    },
+    {
+      "id": "verifiability",
+      "title": "Verifiability",
+      "url": "https://karpathy.bearblog.dev/verifiability/",
+      "kind": "article",
+      "track": "evaluation",
+      "priority": 0,
+      "teaching_move": "Treat observability and cheap checking as constraints on useful automation.",
+      "minimum_artifact": "A task table scored by generation cost and verification cost."
+    }
+  ]
+}

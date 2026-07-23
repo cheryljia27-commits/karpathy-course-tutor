@@ -1,0 +1,4 @@
+interface:
+  display_name: "Karpathy Course Tutor"
+  short_description: "Build tiny, source-grounded learning loops"
+  default_prompt: "Use $karpathy-course-tutor to turn my current course notes into one source-grounded 10-minute learning artifact."
