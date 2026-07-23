@@ -21,6 +21,19 @@ The original interface experiment is kept separately:
 *An 8-second, anonymized interaction prototype. Click the image for the H.264
 video. The iMessage transport is not included in the public repository.*
 
+## Origin
+
+This project began as a private AI Tutor Bot I built for myself while working
+through Andrej Karpathy's online courses. The material was available; the
+recurring problem was returning after an interruption without reconstructing
+what I had understood, where the explanation had broken down, and what the
+smallest useful next step should be.
+
+The public version extracts that reusable learning mechanism from the original
+interface experiment: explicit learner state, one source-grounded action, one
+small artifact, and one observable completion check. Private notes and message
+transport remain outside the repository.
+
 ## Verify it in three minutes
 
 Requires Python 3.10 or newer.
@@ -69,7 +82,25 @@ flowchart LR
   E --> B
 ```
 
-## Example
+## Representative Agent Skill run
+
+The bundled Agent Skill was run against the public sample state for an
+interruption during the tool-use section of *Deep Dive into LLMs like ChatGPT*.
+It kept the current source, rejected the tempting full-lecture restart, and
+returned one bounded intervention:
+
+```text
+Re-entry: Explain what the model checked, not only what tool use does.
+Artifact: Spend 10 minutes rewriting one sentence in notes/tool-use.md.
+Check: Pass if the sentence names both the external action and the returned evidence.
+Source: Deep Dive into LLMs like ChatGPT
+        https://www.youtube.com/watch?v=7xTGNNLPyMI
+```
+
+See the complete input, agent decision, output, and observable result in
+[`examples/agent-skill-run.md`](examples/agent-skill-run.md).
+
+## Deterministic CLI example
 
 Given the synthetic state in
 [`examples/learner-state.json`](examples/learner-state.json), the deterministic
@@ -132,7 +163,7 @@ minimum artifacts. The teacher and original source remain the authority.
 src/karpathy_course_tutor/  deterministic state, message, progress, and eval CLI
 skill/                      adaptive Agent Skill
 source-packs/               curated primary-source learning map
-examples/                   synthetic learner state and seed eval cases
+examples/                   learner state, Agent Skill run, and seed eval cases
 docs/                       product thesis, architecture, and evaluation rubric
 tests/                      state, CLI, behavior, and source-pack checks
 .github/workflows/          supported-version and installed-wheel verification
